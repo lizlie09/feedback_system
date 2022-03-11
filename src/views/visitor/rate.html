@@ -1,0 +1,400 @@
+<div class="container">
+    {{> navbar-visitor}}
+
+    {{#if message}}
+    <div class="alert alert-{{alertType}} alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {{/if}}
+    <div class="container active input_name_div" id="dashboardRate" data-tab-content >
+       
+        <center>
+            <img src="../assets/img/rating_dashboard_img.png" class="img-fluid mt-5">
+            <select class="custom-select" id="establishments" required>
+                <option value="" selected>Select Department</option>
+                {{#each establishments}}
+                <option value="{{this.name}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+            <input type="text" class="form-control none" id="fullnameInput" placeholder="Enter Fullname" value="{{credentials.firstname}} {{credentials.middlename}} {{credentials.lastname}}">
+        </center>
+            <span id="errorName" class="text-danger f-12 mb-2" >Please fillup the form</span>
+        <center>
+            <button onclick="submitName()" id="rateNowActiveButton" type="button"class="btn btn-warning btn-block mt-2 active tab" ><b>Continue</b></button>
+        </center>
+    </div>
+    <div id="dashboardWelcome">
+        <div class="container">
+            <div class="col-sm-12">
+                <span class="rate_greeting_text">Welcome, <span id="raterFullname">Juan</span></span>
+            </div>
+            <div class="row pt-4">
+                <div class="col-sm-4">
+                    <button id="rtBTN" data-tab-target="#rate" type="button" class="btn btn-warning btn-block mt-2 active tab optionBTN" ><b>Click to rate</b></button>
+                </div>
+                <div class="col-sm-4">
+                    <button id="thirdBTN" data-tab-target="#reports" type="button"  class="btn btn-warning btn-block mt-2 tab optionBTN" ><b>Click to report</b></button>
+                </div>
+            </div> 
+        </div>
+        <!-- Swtichable Tabs Starts here-->
+        <div class="container mt-5">
+            <div class="tab-content">
+                    <!-- Rate Division Here -->
+                    <div  id="rate" data-tab-content>
+                        <h5>Rate</h5>
+                        <div class="row mt-4" style="text-align: center;">
+                            <div class="col-sm-2 m-2 ratingCategory">
+                                <h6 class="rating_text">5 Stars - very satisfied</h6>
+                            </div>
+                            <div class="col-sm-2 m-2 ratingCategory">
+                                <h6 class="rating_text">4 Stars - satisfied</h6>
+                            </div>
+                            <div class="col-sm-2 m-2 ratingCategory">
+                                <h6 class="rating_text">3 Stars - neutral</h6>
+                            </div>
+                            <div class="col-sm-2 m-2 ratingCategory">
+                                <h6 class="rating_text">2 Stars - dissatisfied</h6>
+                            </div>
+                            <div class="col-sm-2 m-2 ratingCategory">
+                                <h6 class="rating_text">1 Star - very dissatisfied</h6>
+                            </div>
+                            <div class="col-sm-2 m-2">
+                            </div>
+                        </div>
+                        <form method="POST" action="/visitor/ratings" role="form">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h5 class="ib">Courtesy</h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star1" class="star_courtesy-1" id="star_courtesy-1" />
+                                            <label class="star_courtesy-1" for="star_courtesy-1">1</label>
+                                            <input type="radio" value="2" required name="star1" class="star_courtesy-2" id="star_courtesy-2" />
+                                            <label class="star_courtesy-2" for="star_courtesy-2">2</label>
+                                            <input type="radio" value="3" required name="star1" class="star_courtesy-3" id="star_courtesy-3" />
+                                            <label class="star_courtesy-3" for="star_courtesy-3">3</label>
+                                            <input type="radio" value="4" required name="star1" class="star_courtesy-4" id="star_courtesy-4" />
+                                            <label class="star_courtesy-4" for="star_courtesy-4">4</label>
+                                            <input type="radio" value="5" required name="star1" class="star_courtesy-5" id="star_courtesy-5" />
+                                            <label class="star_courtesy-5" for="star_courtesy-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 class="ib">Biosecurity</h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star2" class="star_biosecurity-1" id="star_biosecurity-1" />
+                                            <label class="star_biosecurity-1" for="star_biosecurity-1">1</label>
+                                            <input type="radio" value="2" required name="star2" class="star_biosecurity-2" id="star_biosecurity-2" />
+                                            <label class="star_biosecurity-2" for="star_biosecurity-2">2</label>
+                                            <input type="radio" value="3" required name="star2" class="star_biosecurity-3" id="star_biosecurity-3" />
+                                            <label class="star_biosecurity-3" for="star_biosecurity-3">3</label>
+                                            <input type="radio" value="4" required name="star2" class="star_biosecurity-4" id="star_biosecurity-4" />
+                                            <label class="star_biosecurity-4" for="star_biosecurity-4">4</label>
+                                            <input type="radio" value="5" required name="star2" class="star_biosecurity-5" id="star_biosecurity-5" />
+                                            <label class="star_biosecurity-5" for="star_biosecurity-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 class="ib">Painted Walls</h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star3" class="star_paintedWalls-1" id="star_paintedWalls-1" />
+                                            <label class="star_paintedWalls-1" for="star_paintedWalls-1">1</label>
+                                            <input type="radio" value="2" required name="star3" class="star_paintedWalls-2" id="star_paintedWalls-2" />
+                                            <label class="star_paintedWalls-2" for="star_paintedWalls-2">2</label>
+                                            <input type="radio" value="3" required name="star3" class="star_paintedWalls-3" id="star_paintedWalls-3" />
+                                            <label class="star_paintedWalls-3" for="star_paintedWalls-3">3</label>
+                                            <input type="radio" value="4" required name="star3" class="star_paintedWalls-4" id="star_paintedWalls-4" />
+                                            <label class="star_paintedWalls-4" for="star_paintedWalls-4">4</label>
+                                            <input type="radio" value="5" required name="star3" class="star_paintedWalls-5" id="star_paintedWalls-5" />
+                                            <label class="star_paintedWalls-5" for="star_paintedWalls-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 class="ib">Cleanliness</h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star4" class="star_cleanliness-1" id="star_cleanliness-1" />
+                                            <label class="star_cleanliness-1" for="star_cleanliness-1">1</label>
+                                            <input type="radio" value="2" required name="star4" class="star_cleanliness-2" id="star_cleanliness-2" />
+                                            <label class="star_cleanliness-2" for="star_cleanliness-2">2</label>
+                                            <input type="radio" value="3" required name="star4" class="star_cleanliness-3" id="star_cleanliness-3" />
+                                            <label class="star_cleanliness-3" for="star_cleanliness-3">3</label>
+                                            <input type="radio" value="4" required name="star4" class="star_cleanliness-4" id="star_cleanliness-4" />
+                                            <label class="star_cleanliness-4" for="star_cleanliness-4">4</label>
+                                            <input type="radio" value="5" required name="star4" class="star_cleanliness-5" id="star_cleanliness-5" />
+                                            <label class="star_cleanliness-5" for="star_cleanliness-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 class="ib">Responsiveness</h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star5" class="star_responsiveness-1" id="star_responsiveness-1" />
+                                            <label class="star_responsiveness-1" for="star_responsiveness-1">1</label>
+                                            <input type="radio" value="2" required name="star5" class="star_responsiveness-2" id="star_responsiveness-2" />
+                                            <label class="star_responsiveness-2" for="star_responsiveness-2">2</label>
+                                            <input type="radio" value="3" required name="star5" class="star_responsiveness-3" id="star_responsiveness-3" />
+                                            <label class="star_responsiveness-3" for="star_responsiveness-3">3</label>
+                                            <input type="radio" value="4" required name="star5" class="star_responsiveness-4" id="star_responsiveness-4" />
+                                            <label class="star_responsiveness-4" for="star_responsiveness-4">4</label>
+                                            <input type="radio" value="5" required name="star5" class="star_responsiveness-5" id="star_responsiveness-5" />
+                                            <label class="star_responsiveness-5" for="star_responsiveness-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 class="ib"><span class="text_small">Adequate Lightning</span></h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star6" class="star_AdquateLightning-1" id="star_AdquateLightning-1" />
+                                            <label class="star_AdquateLightning-1" for="star_AdquateLightning-1">1</label>
+                                            <input type="radio" value="2" required name="star6" class="star_AdquateLightning-2" id="star_AdquateLightning-2" />
+                                            <label class="star_AdquateLightning-2" for="star_AdquateLightning-2">2</label>
+                                            <input type="radio" value="3" required name="star6" class="star_AdquateLightning-3" id="star_AdquateLightning-3" />
+                                            <label class="star_AdquateLightning-3" for="star_AdquateLightning-3">3</label>
+                                            <input type="radio" value="4" required name="star6" class="star_AdquateLightning-4" id="star_AdquateLightning-4" />
+                                            <label class="star_AdquateLightning-4" for="star_AdquateLightning-4">4</label>
+                                            <input type="radio" value="5" required name="star6" class="star_AdquateLightning-5" id="star_AdquateLightning-5" />
+                                            <label class="star_AdquateLightning-5" for="star_AdquateLightning-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 class="ib"><span class="text_small">Ground Landscaping</span></h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star7" class="star_GLS-1" id="star_GLS-1" />
+                                            <label class="star_GLS-1" for="star_GLS-1">1</label>
+                                            <input type="radio" value="2" required name="star7" class="star_GLS-2" id="star_GLS-2" />
+                                            <label class="star_GLS-2" for="star_GLS-2">2</label>
+                                            <input type="radio" value="3" required name="star7" class="star_GLS-3" id="star_GLS-3" />
+                                            <label class="star_GLS-3" for="star_GLS-3">3</label>
+                                            <input type="radio" value="4" required name="star7" class="star_GLS-4" id="star_GLS-4" />
+                                            <label class="star_GLS-4" for="star_GLS-4">4</label>
+                                            <input type="radio" value="5" required name="star7" class="star_GLS-5" id="star_GLS-5" />
+                                            <label class="star_GLS-5" for="star_GLS-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 class="ib"><span class="text_small">Health Protocol</span></h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star8" class="star_HP-1" id="star_HP-1" />
+                                            <label class="star_HP-1" for="star_HP-1">1</label>
+                                            <input type="radio" value="2" required name="star8" class="star_HP-2" id="star_HP-2" />
+                                            <label class="star_HP-2" for="star_HP-2">2</label>
+                                            <input type="radio" value="3" required name="star8" class="star_HP-3" id="star_HP-3" />
+                                            <label class="star_HP-3" for="star_HP-3">3</label>
+                                            <input type="radio" value="4" required name="star8" class="star_HP-4" id="star_HP-4" />
+                                            <label class="star_HP-4" for="star_HP-4">4</label>
+                                            <input type="radio" value="5" required name="star8" class="star_HP-5" id="star_HP-5" />
+                                            <label class="star_HP-5" for="star_HP-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 class="ib"><span class="text_small">Garbage Bin Labeled</span></h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star9" class="star_GBL-1" id="star_GBL-1" />
+                                            <label class="star_GBL-1" for="star_GBL-1">1</label>
+                                            <input type="radio" value="2" required name="star9" class="star_GBL-2" id="star_GBL-2" />
+                                            <label class="star_GBL-2" for="star_GBL-2">2</label>
+                                            <input type="radio" value="3" required name="star9" class="star_GBL-3" id="star_GBL-3" />
+                                            <label class="star_GBL-3" for="star_GBL-3">3</label>
+                                            <input type="radio" value="4" required name="star9" class="star_GBL-4" id="star_GBL-4" />
+                                            <label class="star_GBL-4" for="star_GBL-4">4</label>
+                                            <input type="radio" value="5" required name="star9" class="star_GBL-5" id="star_GBL-5" />
+                                            <label class="star_GBL-5" for="star_GBL-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h5 class="ib"><span class="text_small">Water System</span></h5>
+                                    <div class="parent-star ib">
+                                        <div class="stars" >
+                                            <input type="radio" value="1" required name="star10" class="star_waterSystem-1" id="star_waterSystem-1" />
+                                            <label class="star_waterSystem-1" for="star_waterSystem-1">1</label>
+                                            <input type="radio" value="2" required name="star10" class="star_waterSystem-2" id="star_waterSystem-2" />
+                                            <label class="star_waterSystem-2" for="star_waterSystem-2">2</label>
+                                            <input type="radio" value="3" required name="star10" class="star_waterSystem-3" id="star_waterSystem-3" />
+                                            <label class="star_waterSystem-3" for="star_waterSystem-3">3</label>
+                                            <input type="radio" value="4" required name="star10" class="star_waterSystem-4" id="star_waterSystem-4" />
+                                            <label class="star_waterSystem-4" for="star_waterSystem-4">4</label>
+                                            <input type="radio" value="5" required name="star10" class="star_waterSystem-5" id="star_waterSystem-5" />
+                                            <label class="star_waterSystem-5" for="star_waterSystem-5">5</label>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-5 mb-5">
+                                <div class="col-sm-12">
+                                    <h5>Comments and Suggestions:   </h5>
+                                    <textarea name="rateComment" class="feedback-input rateComment" placeholder=""></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <input type="text" class="get-fullname" name="fullname" hidden/>
+                                <input type="text" class="get-establishment" name="establishment" hidden/>
+                                <button type="submit" class="btn btn-warning concernSubmitBtn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Reports Division Here -->
+                    <div id="reports" data-tab-content>
+                        <h5>Reports</h5>
+                            <div class="row mt-5">
+                                <div class="col-sm-12">
+                                    <label class="checkbox-inline report_text"><input type="checkbox" class="check_box_class" value="Refusal to obey legitimate  management instructions">Refusal to obey legitimate  management instructions</label><br>
+                                    <label class="checkbox-inline report_text"><input type="checkbox" class="check_box_class" value="Negligence in performance of duties">Negligence in performance of duties</label><br>
+                                    <label class="checkbox-inline report_text"><input type="checkbox" class="check_box_class" value="Absenteeism and leaving the workplace without permission">Absenteeism and leaving the workplace without permission</label><br>
+                                    <label class="checkbox-inline report_text"><input type="checkbox" class="check_box_class" value="Miss conduct in relationships with fellow employees or clients in the Public">Miss conduct in relationships with fellow employees or clients in the Public</label><br>
+                                    <label class="checkbox-inline report_text"><input type="checkbox" class="check_box_class" value="Damage to council property">Damage to council property</label><br>
+                                    <label class="checkbox-inline report_text"><input type="checkbox" class="check_box_class" value="Swearing or verbal abuse of fellow employees or client in the Public">Swearing or verbal abuse of fellow employees or client in the Public</label><br>
+                                    <label class="checkbox-inline report_text"><input type="checkbox" class="check_box_class" value="Unauthorized use of councils facilities ( ex. tools, Equipment’s and vehicles)">Unauthorized use of councils facilities ( ex. tools, Equipment’s and vehicles)</label><br>
+                                </div>
+                            </div>
+                            <div class="row mt-5 mb-5">
+                                <div class="col-sm-12">
+                                    <h5>Comments and Suggestions:    </h5>
+                                    <textarea name="text" class="feedback_input" id="reports_comment" placeholder="Comment"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <input type="text" class="get-fullname" id="get-fullname-report" hidden/>
+                                <input type="text" class="get-establishment" id="get-establishment-report" hidden/>
+                                <button type="button" class="btn btn-warning concernSubmitBtn" id="submit-fillup">Submit</button>
+                            </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script> 
+
+const tabTarget = document.querySelectorAll('[data-tab-target]');
+const tabContent = document.querySelectorAll('[data-tab-content]');
+tabTarget.forEach(tabTargets => {
+     tabTargets.addEventListener('click',() => {
+          const target = document.querySelector(tabTargets.dataset.tabTarget);
+          tabContent.forEach(tabContents => {
+               tabContents.classList.remove('active');
+          });
+          tabTarget.forEach(tabTargets => {
+               tabTargets.classList.remove('active');
+          });
+          tabTargets.classList.add('active');
+          target.classList.add('active');
+     });
+});
+
+    function submitName(){
+        if (document.getElementById("fullnameInput").value != "" && document.getElementById("establishments").value != ""){
+            document.getElementById("dashboardRate").style.display = "none";
+            document.getElementById("dashboardWelcome").style.display = "block";
+            document.getElementById("errorName").style.display = "none";
+            document.getElementById("rtBTN").click(); 
+            var fullname = document.getElementById("fullnameInput").value;
+            var Establishment = document.getElementById("establishments").value;
+            document.getElementById("raterFullname").innerHTML = fullname;
+            document.getElementsByClassName("get-fullname")[0].value = fullname;
+            document.getElementsByClassName("get-fullname")[1].value = fullname;
+            document.getElementsByClassName("get-establishment")[0].value = Establishment;
+            document.getElementsByClassName("get-establishment")[1].value = Establishment;
+        }else{
+            document.getElementById("errorName").style.display = "block";
+        }
+    }
+
+
+    //Star RAting Javascript
+    $('.js-star-rating').on('change','input', function() {
+  $('.js-current-rating')
+    .removeClass()
+    .addClass('current-rating js-current-rating current-rating--' + this.value);
+});
+</script>
+
+<!-- REPORT -->
+<script>
+    $(document).ready(function(e) {
+    var payload = {};
+    payload.reports = [];
+     var checkboxes = document.querySelectorAll("input[type=checkbox]");
+     var submit = document.getElementById("submit-fillup");
+
+     function getChecked() {
+         var reports = [];
+         for (var i = 0; i < checkboxes.length; i++) {
+             var checkbox = checkboxes[i];
+             if (checkbox.checked) reports.push(checkbox.value);
+         }
+             return reports;
+         }
+     submit.addEventListener("click", function() {
+        var fn=$("#get-fullname-report").val(), es= $("#get-establishment-report").val();
+         var reports = getChecked();
+         console.log(fn, es);
+            if(fn !="" && es != ""){
+                payload.reports.push(reports);
+                submitForm();
+            }else{
+                alert("Please fillup the form");
+            }
+     });
+
+
+    function submitForm() {
+        payload.fullname = $("#get-fullname-report").val();
+        payload.establishment = $("#get-establishment-report").val();
+        payload.reports_comment = $("#reports_comment").val();
+        payload.report = true;
+        
+        console.log(payload);
+
+         $.ajax({
+             type: 'POST',
+             dataType: 'json',
+             url: '{{baseURL}}/visitor/reports',
+             data: JSON.stringify(payload),
+             contentType: 'application/json; charset=utf-8',
+             success: function(data) {
+                 if (data.status === 200) {
+                     window.location.href = "{{baseURL}}/visitor/dashboard?message=Successfully reported!&alertType=success";
+                 } else {
+                     // $.confirm({
+                     //     title: '',
+                     //     content: data.message,
+                     //     type: 'green'
+                     // })
+                 }
+             }
+         }).error(function(res) {
+             alert("Please contact support. Internal Server Error: " + JSON.stringify(res.responseJSON));
+         });
+     }
+ });
+
+</script>

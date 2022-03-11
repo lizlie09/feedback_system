@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-light pt-4 pr-0 pl-0">
+  <img src="../assets/img/icon.png" class="logo mr-3">
+  <span>TSC Breeder farm. External farm of San Miguel foods INC</span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      
+    </ul>
+    <span class="navbar-text">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item {{#if dashboard}}active{{/if}} pr-3">
+          <a class="nav-link" href="/admin/dashboard">Dashboard </a>
+        </li>
+        <li class="nav-item pr-3 {{#if ranking}}active{{/if}}">
+          <a class="nav-link" href="/admin/ranking">Ranking</a>
+        </li>
+        <li class="nav-item pr-3 {{#if establishment}}active{{/if}}">
+          <a class="nav-link" href="/admin/establishment">Department</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{credentials.firstname}} {{credentials.middlename}} {{credentials.lastname}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#"data-toggle="modal" data-target="#changePasswordModal">Change password</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout">Sign out</a>
+          </div>
+        </li>
+      </ul>
+    </span>
+  </div>
+</nav>
+<hr>
+<br>
+
+<!-- CHANGE PASSWORD MODAL -->
+<div class="modal fade" id="changepasswordmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered pl-4 pr-4">
+		<div class="modal-content borderRadius10 pb-4">
+			<div class="modal-header" style="border-bottom: 0px; padding: 5 5 0 0">
+				<button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body pl-5 pr-5">
+				<form action="/admin/dashboard/changepassword" method="POST" onsubmit="return checkForm2(this);">
+					<center>
+						<h3 style="font-weight: bold">CHANGE PASSWORD</h3>
+						<input
+							name="confirmPassword"
+							type="password"
+							class="form-control mb-3 size16 borderRadius20 mt-4"
+							placeholder="Old Password"
+						/>
+						<input
+							name="password"
+							type="password"
+							class="form-control mb-3 size16 borderRadius20"
+							placeholder="New Password"
+						/>
+						<input
+							name="newPassword"
+							type="password"
+							class="form-control mb-3 size16 borderRadius20"
+							placeholder="Confirm Password"
+						/>
+					</center>
+					<button type="submit" class="btn btn-outline-warning size13 borderRadius20 width187 float-right">
+						Submit
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END -->
+<script>
+  function checkForm2(form) {
+        var validation = 0;
+        if (form.password.value != form.newPassword.value) {
+            alert('Password does not match')
+            return false;
+        }
+        return true;
+    }
+</script>

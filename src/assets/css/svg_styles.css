@@ -1,0 +1,24 @@
+#screen-b{
+    animation: screen 3s ease-in-out infinite alternate;
+}
+@keyframes screen {
+    from {
+        opacity: 100%;
+    }
+    to {
+        opacity: 0%;
+    }
+}
+#background-opacity {
+    animation: bg 2s ease-in-out infinite alternate;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+@keyframes bg {
+    from {
+        transform:rotateZ(0deg);
+    }
+    to {
+        transform:rotateZ(10deg);
+    }
+}

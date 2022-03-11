@@ -1,0 +1,28 @@
+<div class="container">
+   {{> navbar-top }}
+      {{#if message}}
+      <div class="alert alert-{{alertType}} alert-dismissible fade show" role="alert">
+          {{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {{/if}}
+      <div class="row pt-3">
+          <div class="col-sm-6">
+              <img src="../assets/img/signup_image.png" class="img-fluid" id="login_page_image">
+          </div>
+          <div class="col-sm-6 pt-5">
+              <div class="container" id="form_container">
+                  <form method="POST"  role="form"  action="/auth/login">
+                      <h3>Sign in</h3><br>
+                      <label><b>Email</b></label>
+                      <input type="text" name="email" class="form-control login_input" required>
+                      <label><b>Password</b></label>
+                      <input type="password" name="password" class="form-control login_input" required>
+                      <button type="submit" class="btn btn-warning btn-block mt-3 mb-5 login_button">Login</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>

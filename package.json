@@ -1,0 +1,39 @@
+{
+  "name": "feedbackSystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "devmode": "nodemon --exec npm start"
+  },
+  "author": "Lizlie Precyrose Micayabas",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap-validator": "^0.11.9",
+    "fs": "0.0.1-security",
+    "good": "^6.4.0",
+    "good-console": "^5.2.0",
+    "handlebars": "^4.7.7",
+    "handlebars-paginate": "^0.1.0",
+    "hapi": "^16.5.2",
+    "hapi-auth-cookie": "^6.1.1",
+    "hapi-require-https": "^2.0.6",
+    "inert": "^4.2.0",
+    "kill-port": "^1.3.2",
+    "lodash": "^4.17.21",
+    "marked": "^2.0.3",
+    "moment": "^2.10.6",
+    "mongoose": "^5.12.5",
+    "mongoose-aggregate-paginate": "^1.1.2",
+    "mongoose-delete": "^0.3.2",
+    "mongoose-paginate": "^5.0.0",
+    "mongoose-tree-ancestors": "^1.0.1",
+    "nes": "^6.4.0",
+    "nodemon": "^2.0.7",
+    "swag": "^0.7.0",
+    "underscore": "^1.13.1",
+    "validator": "^9.4.1",
+    "vision": "^4.0.1"
+  }
+}

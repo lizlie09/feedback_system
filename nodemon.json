@@ -1,0 +1,18 @@
+{
+  "restartable": "rs",
+  "watch": [
+    "src/*"
+  ],
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "frontend/",
+    "build/"
+  ],
+  "ext": "js json jsx",
+  "events":{
+    "start": "osx-notifier --type='info' --tile='nodemon' --message='ARU Started'",
+    "crash": "osx-notifier --type='fail' --tile='nodemon' --message='ARU Crashed'",
+    "restart": "osx-notifier --type='pass' --tile='nodemon' --message='ARU Restarted'"
+  } 
+}

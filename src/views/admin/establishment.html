@@ -1,0 +1,172 @@
+<!-- ADD MODAL-->
+<div class="modal fade " id="modal-establishment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Create Department</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+			<form action="/admin/create_establishment" method="POST">
+				<div class="modal-body">
+          <label>Name of Office</label>
+					<input type="text" name="name" class="form-control mb-1" required>
+          <label>Email</label>
+					<input type="text" name="email" class="form-control mb-1" required>
+          <label>Last name</label>
+					<input type="text" name="lastname" class="form-control mb-1" required>
+          <label>First name</label>
+					<input type="text" name="firstname" class="form-control mb-1" required>
+          <label>Middle name</label>
+					<input type="text" name="middlename" class="form-control mb-1" required>
+          <label>Password</label>
+					<input type="text" name="password" class="form-control mb-1" required>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Create</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- UPDATE MODAL-->
+{{#each establishment}}
+<div class="modal fade " id="{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+			<form id="{{this._id}}" action="/admin/update_establishment" method="POST">
+				<div class="modal-body">
+					<input type="text" name="_id" value="{{this._id}}" class="none" required />
+          <label>Name of Office</label>
+					<input type="text" name="name" class="form-control mb-1" value="{{this.name}}">
+          <label>Email</label>
+					<input type="text" name="email" class="form-control mb-1" required value="{{this.email}}" pattern=".+@gmail.com" >
+          <label>Last name</label>
+					<input type="text" name="lastname" class="form-control mb-1" required value="{{this.lastname}}">
+          <label>First name</label>
+					<input type="text" name="firstname" class="form-control mb-1" required value="{{this.firstname}}">
+          <label>Middle name</label>
+					<input type="text" name="middlename" class="form-control mb-1" required value="{{this.middlename}}">
+          <span class="font-12 color-gray">Clear the name of department to delete</span>
+				</div>
+				<div class="modal-footer">
+					<input type="text" name="void" id="input{{this._id}}" class="none" value="{{this.void}}" />
+					<button type="submit" class="btn btn-success" id="submit{{this._id}}">Save changes</button>
+				</div>
+			</form>
+	  </div>
+	</div>
+  </div>
+{{/each}}
+<!-- END-->
+
+<div class="container">
+  {{>navbar-admin establishment=true ranking=false}}
+  {{#if message}}
+  <div class="alert alert-{{alertType}} alert-dismissible fade show" role="alert">
+      {{message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  {{/if}}
+    <div class="row">
+        <div class="col-sm-7">
+          <h5 style="float: left;">Office</h5>
+          <button class="btn btn-warning" style="float: right;" data-toggle="modal" data-target="#modal-establishment">Add Department</button>
+          <div class="row mt-5">
+              <table class="table p-0 table-sortable">
+                  <thead class="table_head">
+                    <tr>
+                      <th>No.</th>
+                      <th>Name of Office</th>
+                      <th>Email</th>
+                      <th>Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each establishment}}
+                    <tr data-toggle="modal" onclick="$('#{{this._id}}').modal()" class="hover-table">
+                      <th>{{addIndex @index}}</th>
+                      <td>{{this.name}}</td>
+                      <td>{{this.email}}</td>
+                      <td>{{this.lastname}}, {{this.firstname}} {{this.middlename}}</td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+              </table>
+          </div>
+        </div>
+        <div class="col-sm-5">
+            <center>
+              <svg class="img-fluid" width="1137" height="694" viewBox="0 0 1137 694" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_526:237)">
+                <path d="M137.398 693.112L135.447 692.672C157.203 595.921 211.877 508.063 289.398 445.281C348.007 397.889 417.713 366.194 491.952 353.178C566.192 340.163 642.523 346.256 713.758 370.883C784.992 395.511 848.787 437.863 899.136 493.952C949.484 550.041 984.73 618.021 1001.55 691.492L999.604 691.935C953.55 489.726 776.329 348.5 568.634 348.5C363.66 348.5 182.3 493.43 137.398 693.112Z" fill="#3F3D56"/>
+                <path d="M417.133 123.718C447.131 123.718 471.448 99.4007 471.448 69.4032C471.448 39.4058 447.131 15.0881 417.133 15.0881C387.136 15.0881 362.818 39.4058 362.818 69.4032C362.818 99.4007 387.136 123.718 417.133 123.718Z" fill="#FF6584"/>
+                <path d="M183.131 680.773C184.825 687.035 190.627 690.913 190.627 690.913C190.627 690.913 193.682 684.639 191.988 678.377C190.294 672.115 184.492 668.237 184.492 668.237C184.492 668.237 181.437 674.511 183.131 680.773Z" fill="#3F3D56"/>
+                <path d="M185.62 679.427C190.268 683.952 190.836 690.908 190.836 690.908C190.836 690.908 183.867 690.527 179.219 686.002C174.571 681.478 174.003 674.522 174.003 674.522C174.003 674.522 180.971 674.902 185.62 679.427Z" fill="#F9A826"/>
+                <path d="M312.131 680.773C313.825 687.035 319.627 690.913 319.627 690.913C319.627 690.913 322.682 684.639 320.988 678.377C319.294 672.115 313.492 668.237 313.492 668.237C313.492 668.237 310.437 674.511 312.131 680.773Z" fill="#3F3D56"/>
+                <path d="M314.62 679.427C319.268 683.952 319.836 690.908 319.836 690.908C319.836 690.908 312.867 690.527 308.219 686.002C303.571 681.478 303.003 674.522 303.003 674.522C303.003 674.522 309.971 674.902 314.62 679.427Z" fill="#F9A826"/>
+                <path d="M337.71 181.988L317.286 165.648L431.66 63.529H721.679V153.394L533.779 280.022L337.71 181.988Z" fill="#3F3D56"/>
+                <path d="M774.556 120.812V65.569H736.05V79.098L721.679 63.529L627.729 165.648L590.966 190.157L533.964 606.62L619.93 692.585H819.714V169.733L774.556 120.812Z" fill="#CCCCCC"/>
+                <path d="M627.729 165.648H317.286V692.585H627.729V165.648Z" fill="#F2F2F2"/>
+                <path d="M494.974 563.914H437.787V692.585H494.974V563.914Z" fill="#CCCCCC"/>
+                <path d="M376.515 600.677V580.253H352.007V600.677H374.473H376.515Z" fill="#3F3D56"/>
+                <path d="M374.473 617.016H352.007V637.44H376.515V617.016H374.473Z" fill="#3F3D56"/>
+                <path d="M417.363 580.253H392.854V600.677H417.363V580.253Z" fill="#3F3D56"/>
+                <path d="M417.363 617.016H392.854V637.44H417.363V617.016Z" fill="#3F3D56"/>
+                <path d="M543.991 600.677V580.253H519.483V600.677H541.949H543.991Z" fill="#3F3D56"/>
+                <path d="M541.949 617.016H519.483V637.44H543.991V617.016H541.949Z" fill="#3F3D56"/>
+                <path d="M584.839 580.253H560.33V600.677H584.839V580.253Z" fill="#3F3D56"/>
+                <path d="M584.839 617.016H560.33V637.44H584.839V617.016Z" fill="#3F3D56"/>
+                <path d="M715.552 192.199V171.776H691.043V192.199H713.51H715.552Z" fill="#3F3D56"/>
+                <path d="M713.51 208.539H691.043V228.962H715.552V208.539H713.51Z" fill="#3F3D56"/>
+                <path d="M756.4 171.776H731.891V192.199H756.4V171.776Z" fill="#3F3D56"/>
+                <path d="M756.4 208.539H731.891V228.962H756.4V208.539Z" fill="#3F3D56"/>
+                <path d="M715.552 306.573V286.149H691.043V306.573H713.51H715.552Z" fill="#3F3D56"/>
+                <path d="M713.51 322.912H691.043V343.336H715.552V322.912H713.51Z" fill="#3F3D56"/>
+                <path d="M756.4 286.149H731.891V306.573H756.4V286.149Z" fill="#3F3D56"/>
+                <path d="M756.4 322.912H731.891V343.336H756.4V322.912Z" fill="#3F3D56"/>
+                <path d="M715.552 420.947V400.523H691.043V420.947H713.51H715.552Z" fill="#3F3D56"/>
+                <path d="M713.51 437.286H691.043V457.71H715.552V437.286H713.51Z" fill="#3F3D56"/>
+                <path d="M756.4 400.523H731.891V420.947H756.4V400.523Z" fill="#3F3D56"/>
+                <path d="M756.4 437.286H731.891V457.71H756.4V437.286Z" fill="#3F3D56"/>
+                <path d="M715.552 535.321V514.897H691.043V535.321H713.51H715.552Z" fill="#3F3D56"/>
+                <path d="M713.51 551.66H691.043V572.084H715.552V551.66H713.51Z" fill="#3F3D56"/>
+                <path d="M756.4 514.897H731.891V535.321H756.4V514.897Z" fill="#3F3D56"/>
+                <path d="M756.4 551.66H731.891V572.084H756.4V551.66Z" fill="#3F3D56"/>
+                <path d="M588.924 192.199H352.007V241.217H588.924V192.199Z" fill="#3F3D56"/>
+                <path d="M588.924 290.234H352.007V339.251H588.924V290.234Z" fill="#3F3D56"/>
+                <path d="M588.924 388.269H352.007V437.286H588.924V388.269Z" fill="#3F3D56"/>
+                <path d="M588.924 486.303H352.007V535.321H588.924V486.303Z" fill="#3F3D56"/>
+                <path d="M1137 690.529H0V692.529H1137V690.529Z" fill="#3F3D56"/>
+                <path d="M196.28 459.615H190.405V691.668H196.28V459.615Z" fill="#3F3D56"/>
+                <path d="M250.497 489.187C250.871 570.331 193.782 636.375 193.782 636.375C193.782 636.375 136.087 570.86 135.714 489.716C135.34 408.573 192.428 342.529 192.428 342.529C192.428 342.529 250.123 408.044 250.497 489.187Z" fill="#F9A826"/>
+                <path opacity="0.1" d="M250.497 489.187C250.871 570.331 193.782 636.375 193.782 636.375C193.782 636.375 136.087 570.86 135.714 489.716C135.34 408.573 192.428 342.529 192.428 342.529C192.428 342.529 250.123 408.044 250.497 489.187Z" fill="black"/>
+                <path d="M119.908 459.615H114.033V691.668H119.908V459.615Z" fill="#3F3D56"/>
+                <path d="M174.125 489.187C174.499 570.331 117.41 636.375 117.41 636.375C117.41 636.375 59.7155 570.86 59.3416 489.716C58.9676 408.573 116.056 342.529 116.056 342.529C116.056 342.529 173.751 408.044 174.125 489.187Z" fill="#F9A826"/>
+                <path d="M945.555 165.32C899.278 165.534 861.61 166.217 861.61 166.217C861.61 166.217 906.384 106.91 945.387 128.883C984.389 150.856 1029.19 165.445 1029.19 165.445C1029.19 165.445 991.831 165.107 945.555 165.32Z" fill="#F2F2F2"/>
+                <path d="M174.555 279.32C128.278 279.534 90.6104 280.217 90.6104 280.217C90.6104 280.217 135.384 220.91 174.387 242.883C213.389 264.856 258.193 279.445 258.193 279.445C258.193 279.445 220.831 279.107 174.555 279.32Z" fill="#F2F2F2"/>
+                <path d="M342.555 41.3203C296.278 41.5336 258.61 42.2173 258.61 42.2173C258.61 42.2173 303.384 -17.09 342.387 4.8829C381.389 26.8558 426.193 41.4449 426.193 41.4449C426.193 41.4449 388.831 41.107 342.555 41.3203Z" fill="#F2F2F2"/>
+                <path d="M1040.91 459.615H1035.03V691.668H1040.91V459.615Z" fill="#3F3D56"/>
+                <path d="M1095.13 489.187C1095.5 570.331 1038.41 636.375 1038.41 636.375C1038.41 636.375 980.715 570.86 980.342 489.716C979.968 408.573 1037.06 342.529 1037.06 342.529C1037.06 342.529 1094.75 408.044 1095.13 489.187Z" fill="#F9A826"/>
+                <path d="M824.667 547.629H883.956V533.318H916.667V547.629H978V611.007H916.667V690.74H883.956V611.007H824.667L794 576.251L824.667 547.629Z" fill="#3F3D56"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_526:237">
+                <rect width="1137" height="693.112" fill="white"/>
+                </clipPath>
+                </defs>
+                </svg>                
+            </center>
+        </div>
+    </div>
+</div>

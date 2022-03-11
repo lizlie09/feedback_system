@@ -1,0 +1,453 @@
+<!-- 
+  <style>
+.b-skills
+{
+text-align: center;
+}
+
+.b-skills:last-child { margin-bottom: -30px; }
+
+.b-skills h2 { margin-bottom: 50px; font-weight: 900; text-transform: uppercase;}
+
+.skill-item
+{
+position: relative;
+max-width: 150px;
+width: 100%;
+margin-bottom: 30px;
+color: #555;
+}
+
+.chart-container
+{
+position: relative;
+width: 100%;
+height: 0;
+padding-top: 100%;
+margin-bottom: 27px;
+}
+
+.skill-item .chart,
+.skill-item .chart canvas
+{
+position: absolute;
+top: 0;
+left: 0;
+width: 100% !important;
+height: 100% !important;
+}
+
+.skill-item .chart:before
+{
+content: "";
+width: 0;
+height: 100%;
+}
+
+.skill-item .chart:before,
+.skill-item .percent
+{
+display: inline-block;
+vertical-align: middle;
+}
+
+.skill-item .percent
+{
+position: relative;
+line-height: 1;
+font-size: 40px;
+font-weight: 900;
+z-index: 2;
+}
+
+.skill-item  .percent:after
+{
+content: attr(data-after);
+font-size: 20px;
+}
+
+p{
+    font-weight: 900;
+}
+</style> -->
+<!-- UPDATE MODAL-->
+{{#each reports}}
+<div class="modal fade " id="{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Reported Department</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+			<form id="{{this._id}}" action="/admin/dashboard/update-reports" method="POST">
+				<div class="modal-body">
+					<input type="text" name="_id" value="{{this._id}}" class="none" required />
+          <span>Name of Office</span>
+          <input type="text" name="name" value="{{this.establishment}}" class="form-control mb-1" disabled>
+          <span>Name of Visitor</span>
+          <input type="text" name="fullname" value="{{this.fullname}}" class="form-control mb-1" disabled>
+          <span>Reports</span>
+          <textarea class="form-control size14 borderRadius20 mt-1"	name="devices" placeholder=" {{ this.reports }} "	type="text" value=" {{ this.reports }}" style="min-height: 15vh;" disabled> {{this.reports}} </textarea>
+          <span>Response</span>
+          <textarea class="form-control size14 borderRadius20 mt-1"	name="devices" placeholder=" {{ this.reply }} "	type="text" value=" {{ this.reply }}" style="min-height: 15vh;" disabled> {{this.reply}} </textarea>
+          <span>Remarks</span>
+          <select name="remarks" class="form-control size14 borderRadius20 mt-1">
+            <option value="{{this.remarks}}" selected hidden>{{#if this.remarks}}Done{{else}}Pending{{/if}}</option>
+            <option value="false">Pending</option>
+            <option value="true">Done</option>
+          </select>
+				</div>
+				<div class="modal-footer">
+					<input type="text" name="void" id="input{{this._id}}" class="none" value="{{this.void}}" />
+					<button type="submit" class="btn btn-success" id="submit{{this._id}}">Save changes</button>
+				</div>
+			</form>
+	  </div>
+	</div>
+  </div>
+{{/each}}
+
+{{#each comment}}
+<div class="modal fade " id="{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Customer concern</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+			<form id="{{this._id}}" action="/admin/dashboard/update-concern" method="POST">
+				<div class="modal-body">
+					<input type="text" name="_id" value="{{this._id}}" class="none" required />
+          <span>Name of Office</span>
+          <input type="text" name="name" value="{{this.establishment}}" class="form-control mb-1" disabled>
+          <span>Name of Visitor</span>
+          <input type="text" name="fullname" value="{{this.fullname}}" class="form-control mb-1" disabled>
+          <span>Customer concern</span>
+          <textarea class="form-control size14 borderRadius20 mt-1"	name="devices" placeholder="{{this.rateComment}}"	type="text" value="{{this.rateComment}}" style="min-height: 15vh;" disabled> {{this.rateComment}} </textarea>
+          <span>Response</span>
+          <textarea class="form-control size14 borderRadius20 mt-1"	name="devices" placeholder=" {{ this.reply }} "	type="text" value=" {{ this.reply }}" style="min-height: 15vh;" disabled> {{this.reply}} </textarea>
+          <span>Remarks</span>
+          <select name="remarks" class="form-control size14 borderRadius20 mt-1">
+            <option value="{{this.remarks}}" selected hidden>{{#if this.remarks}}Done{{else}}Pending{{/if}}</option>
+            <option value="false">Pending</option>
+            <option value="true">Done</option>
+          </select>
+				</div>
+				<div class="modal-footer">
+					<input type="text" name="void" id="input{{this._id}}" class="none" value="{{this.void}}" />
+					<button type="submit" class="btn btn-success" id="submit{{this._id}}">Save changes</button>
+				</div>
+			</form>
+	  </div>
+	</div>
+  </div>
+{{/each}}
+<!-- END-->
+
+<div class="container mb-4">
+{{>navbar-admin dashboard=true}}
+{{#if message}}
+<div class="alert alert-{{alertType}} alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{{/if}}
+<form method="GET" action="/admin/dashboard_search" role="form">
+  <div class="row mb-3">
+    <div id="tab" class="col-sm-4">
+      <h3>Performance</h3>
+    </div>
+    <div class="col-sm-2">
+      <span>Start Date</span><br>
+      <input type="date" class="form-control" name="startDate">
+    </div>
+    <div class="col-sm-2">
+      <span>End Date</span><br>
+      <input type="date" class="form-control"  name="endDate">
+    </div>
+    <div class="col-sm-2">
+      <span></span><br>
+    <button type="button" class="btn btn-warning date_btn" value="Print Table"  style="color:white; background-color:#F4B246" onclick="myApp.printTable()">Print</button>
+  </div>
+    <div class="col-sm-2">
+      <span></span><br>
+      <button type="submit" class="btn btn-warning date_btn">Submit</button>
+    </div>
+</div>
+</form>
+<center>
+      <div class="row pl-4">
+        <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateOne rate.Cnt}}%</h3>
+          <span>Courtesy</span>
+        </div>
+        <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+            <h3 class="performance_text_percentage">{{percentage rate.rateTwo rate.Cnt}}%</h3>
+            <span>Biosecurity</span>
+        </div>
+        <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+            <h3 class="performance_text_percentage">{{percentage rate.rateThree rate.Cnt}}%</h3>
+            <span>Painted Walls</span>
+        </div>
+        <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+            <h3 class="performance_text_percentage">{{percentage rate.rateFour rate.Cnt}}%</h3>
+            <span>Cleanliness</span>
+        </div>
+        <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+            <h3 class="performance_text_percentage">{{percentage rate.rateFive rate.Cnt}}%</h3>
+            <span>Responsiveness</span>
+        </div>
+        <div id="tabsss"class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateSix rate.Cnt}}%</h3>
+          <span>Adequate Lightning</span>
+        </div>
+        <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateSeven rate.Cnt}}%</h3>
+          <span>Ground Landscaping</span>
+        </div>
+        <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateEight rate.Cnt}}%</h3>
+          <span>Health Protocol</span>
+        </div>
+        <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateNine rate.Cnt}}%</h3>
+          <span>Garbage Bin Labeled</span>
+        </div>
+        <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateTen rate.Cnt}}%</h3>
+          <span>Water System</span>
+    </div>
+    </div>
+  </center>
+<!-- <section id="s-team" class="section ml-5 pl-4 mt-4">
+  <div class="b-skills">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateOne rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateOne rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Performance</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateTwo rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateTwo rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Biosecurity</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateThree rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateThree rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Painted Walls</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateFour rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateFour rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Cleanliness</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateFive rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateFive rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Responsiveness</p>
+          </div>
+        </div>
+          <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateSix rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateSix rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Adequate Lightning</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateSeven rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateSeven rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Ground Landscaping</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateEight rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateEight rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Health Protocol</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateNine rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateNine rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Garbage Bin Labeled</p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-2 p-2">
+          <div class="skill-item center-block">
+            <div class="chart-container">
+              <div class="chart " data-percent="{{percentage rate.rateTen rate.Cnt}}" data-bar-color="#FBAF1D">
+                <span class="percent" data-after="%">{{percentage rate.rateTen rate.Cnt}}</span>
+              </div>
+            </div>
+            <p>Water System</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+    <br>
+    <span id="reported_establishment_text">Reported Department</span>
+
+    <div id="tabs" class="row">
+        <div class="col-sm-7 mt-3 table-responsive">
+            <table class="table">
+                <thead class="table_head">
+                  <tr>
+                    <th>Name</th>
+                    <th>Issue</th>
+                    <th>Remarks</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each reports}}
+                  <tr data-toggle="modal" onclick="$('#{{this._id}}').modal()" class="hover-table">
+                    <th>{{this.establishment}}</th>
+                    <td class="reported_establishment_issue_text">{{this.reports}}</td>
+                    <td>{{#if this.remarks}}Done{{else}}Pending{{/if}}</td>
+                    <td class="reported_establishment_issue_text">{{ convertDate this.createdAt 'LL'}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+            </table>
+          </div>
+        <div class="col-sm-5 mt-3 table-responsive">
+            <table class="table">
+                <thead class="table_head">
+                  <tr>
+                    <th>Customer Concerns</th>
+                    <th>Remarks</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each comment}}
+                  <tr data-toggle="modal" onclick="$('#{{this._id}}').modal()" class="hover-table">
+                    <td class="customer_concern_text">{{this.rateComment}}</td>
+                    <td>{{#if this.remarks}}Done{{else}}Pending{{/if}}</td>
+                    <td class="reported_establishment_issue_text">{{ convertDate this.createdAt 'LL'}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+  'use strict';
+
+var $window = $(window);
+
+function run()
+{
+var fName = arguments[0],
+  aArgs = Array.prototype.slice.call(arguments, 1);
+try {
+  fName.apply(window, aArgs);
+} catch(err) {
+   
+}
+};
+
+/* chart
+================================================== */
+function _chart ()
+{
+$('.b-skills').appear(function() {
+  setTimeout(function() {
+    $('.chart').easyPieChart({
+      easing: 'easeOutElastic',
+      delay: 3000,
+      barColor: '#369670',
+      trackColor: '#fff',
+      scaleColor: false,
+      lineWidth: 21,
+      trackWidth: 21,
+      size: 250,
+      lineCap: 'round',
+      onStep: function(from, to, percent) {
+        this.el.children[0].innerHTML = Math.round(percent);
+      }
+    });
+  }, 150);
+});
+};
+
+
+$(document).ready(function() {
+
+run(_chart);
+
+  
+});
+
+var myApp = new function () {
+        this.printTable = function () {
+            var tab = document.getElementById('tab');
+
+            var style = "<style>";
+                style = style + "table {width: 100%;font: 17px Calibri;}";
+                style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+                style = style + "padding: 2px 3px;text-align: center;}";
+                style = style + "</style>";
+
+            var win = window.open('', '', 'height=700,width=700');
+            win.document.write(style);          //  add the style.
+            win.document.write(tab.outerHTML);
+            win.document.write(tabs.outerHTML);
+            win.document.close();
+            win.print();
+        }
+    }
+</script>

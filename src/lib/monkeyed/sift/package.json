@@ -1,0 +1,109 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "sift",
+        "scope": null,
+        "escapedName": "sift",
+        "name": "sift",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/tyrohuntertan/Documents/api"
+    ]
+  ],
+  "_from": "sift@latest",
+  "_id": "sift@3.3.11",
+  "_inCache": true,
+  "_location": "/sift",
+  "_nodeVersion": "6.9.4",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/sift-3.3.11.tgz_1497474441667_0.7202656427398324"
+  },
+  "_npmUser": {
+    "name": "crcn",
+    "email": "craig.j.condon@gmail.com"
+  },
+  "_npmVersion": "5.0.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "sift",
+    "scope": null,
+    "escapedName": "sift",
+    "name": "sift",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/sift/-/sift-3.3.11.tgz",
+  "_shasum": "2ca4984e854e56f89e204cbdc48b51df408edb68",
+  "_shrinkwrap": null,
+  "_spec": "sift",
+  "_where": "/Users/tyrohuntertan/Documents/api",
+  "author": {
+    "name": "Craig Condon",
+    "email": "craig.j.condon@gmail.com",
+    "url": "http://crcn.io"
+  },
+  "bugs": {
+    "url": "https://github.com/crcn/sift.js/issues"
+  },
+  "dependencies": {},
+  "description": "mongodb query style array filtering",
+  "devDependencies": {
+    "benchmark": "^1.0.0",
+    "bson": "^0.2.18",
+    "gulp": "^3.9.0",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-istanbul": "^0.10.0",
+    "gulp-jscs": "^1.6.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-mocha": "^2.1.2",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.2.0",
+    "immutable": "^3.7.6",
+    "nodangel": "^1.3.8",
+    "yargs": "^3.15.0"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-IO7TSSs2Rw8s36LpKzKkxfcRpvl1xFLPHnBjfPlvoYU24gwhEfKBOrvdSd+lpNoPlXKMIZx2GNoTu3HzDcwVvw==",
+    "shasum": "2ca4984e854e56f89e204cbdc48b51df408edb68",
+    "tarball": "https://registry.npmjs.org/sift/-/sift-3.3.11.tgz"
+  },
+  "engines": {},
+  "gitHead": "7f91bf229f4fe985107090d4c8cea90e82d0ad69",
+  "homepage": "https://github.com/crcn/sift.js#readme",
+  "license": "MIT",
+  "main": "./sift.js",
+  "maintainers": [
+    {
+      "name": "architectd",
+      "email": "craig.j.condon@gmail.com"
+    },
+    {
+      "name": "crcn",
+      "email": "craig.j.condon@gmail.com"
+    }
+  ],
+  "name": "sift",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crcn/sift.js.git"
+  },
+  "scripts": {
+    "tdd": "nodangel --ignore node_modules --watch test --watch sift.js --exec 'npm run test'",
+    "test": "gulp test-coverage",
+    "test-coveralls": "gulp test-coveralls"
+  },
+  "typings": "./index.d.ts",
+  "version": "3.3.11"
+}

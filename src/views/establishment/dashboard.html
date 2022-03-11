@@ -1,0 +1,181 @@
+<!-- UPDATE MODAL-->
+{{#each reports}}
+<div class="modal fade " id="{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Reported Department</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+			<form id="{{this._id}}" action="/establishment/reply-reports" method="POST">
+				<div class="modal-body">
+					<input type="text" name="_id" value="{{this._id}}" class="none" required />
+          <span>Name of Office</span>
+          <input type="text" name="name" value="{{this.establishment}}" class="form-control mb-1" disabled>
+          <span>Reports</span>
+          <textarea class="form-control size14 borderRadius20 mt-1" placeholder=" {{ this.reports }} "	type="text" value=" {{ this.reports }}" style="min-height: 20vh;" disabled> {{this.reports}} </textarea>
+          <span>Response</span>
+          <input type="text" name="reply" value="{{this.reply}}" class="form-control mb-1">
+				</div>
+				<div class="modal-footer">
+					<input type="text" name="void" id="input{{this._id}}" class="none" value="{{this.void}}" />
+					<button type="submit" class="btn btn-success" id="submit{{this._id}}">Submit</button>
+				</div>
+			</form>
+	  </div>
+	</div>
+  </div>
+{{/each}}
+
+{{#each comment}}
+<div class="modal fade " id="{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Customer concerns</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+			<form id="{{this._id}}" action="/establishment/reply-concern" method="POST">
+				<div class="modal-body">
+					<input type="text" name="_id" value="{{this._id}}" class="none" required />
+          <span>Name of Department</span>
+          <input type="text" name="name" value="{{this.establishment}}" class="form-control mb-1" disabled>
+          <span>Customer concerns</span>
+          <textarea class="form-control size14 borderRadius20 mt-1"	name="devices" placeholder="{{this.rateComment}}"	type="text" value="{{this.rateComment}}" style="min-height: 20vh;" disabled> {{this.rateComment}} </textarea>
+          <span>Response</span>
+          <input type="text" name="reply" value="{{this.reply}}" class="form-control mb-1">
+				</div>
+				<div class="modal-footer">
+					<input type="text" name="void" id="input{{this._id}}" class="none" value="{{this.void}}" />
+					<button type="submit" class="btn btn-success" id="submit{{this._id}}">Save changes</button>
+				</div>
+			</form>
+	  </div>
+	</div>
+  </div>
+{{/each}}
+<!-- END-->
+
+<div class="container mb-4">
+{{>navbar-establishment}}
+{{#if message}}
+<div class="alert alert-{{alertType}} alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{{/if}}
+<form method="GET" action="/establishment/dashboard_search" role="form">
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h3>Performance</h3>
+    </div>
+    <div class="col-sm-2">
+      <span>Start Date</span><br>
+      <input type="date" class="form-control" name="startDate">
+    </div>
+    <div class="col-sm-2">
+      <span>End Date</span><br>
+      <input type="date" class="form-control"  name="endDate">
+    </div>
+    <div class="col-sm-2">
+      <span></span><br>
+      <button type="submit" class="btn btn-warning date_btn">Submit</button>
+    </div>
+  </div>
+</form>
+<center>
+    <div class="row pl-4">
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+        <h3 class="performance_text_percentage">{{percentage rate.rateOne rate.Cnt}}%</h3>
+        <span>Courtesy</span>
+      </div>
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateTwo rate.Cnt}}%</h3>
+          <span>Biosecurity</span>
+      </div>
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateThree rate.Cnt}}%</h3>
+          <span>Painted Walls</span>
+      </div>
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateFour rate.Cnt}}%</h3>
+          <span>Cleanliness</span>
+      </div>
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+          <h3 class="performance_text_percentage">{{percentage rate.rateFive rate.Cnt}}%</h3>
+          <span>Responsiveness</span>
+      </div>
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+        <h3 class="performance_text_percentage">{{percentage rate.rateSix rate.Cnt}}%</h3>
+        <span>Adequate Lightning</span>
+      </div>
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+        <h3 class="performance_text_percentage">{{percentage rate.rateSeven rate.Cnt}}%</h3>
+        <span>Ground Landscaping</span>
+      </div>
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+        <h3 class="performance_text_percentage">{{percentage rate.rateEight rate.Cnt}}%</h3>
+        <span>Health Protocol</span>
+      </div>
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+        <h3 class="performance_text_percentage">{{percentage rate.rateNine rate.Cnt}}%</h3>
+        <span>Garbage Bin Labeled</span>
+      </div>
+      <div class="col-sm-2 mr-3 ml-3 mt-2 mb-2 performance_category">
+        <h3 class="performance_text_percentage">{{percentage rate.rateTen rate.Cnt}}%</h3>
+        <span>Water System</span>
+      </div>
+    </div>
+</center>
+    <br>
+    <span id="reported_establishment_text">Reported Establishment</span>
+
+    <div class="row">
+        <div class="col-sm-7 mt-3 table-responsive">
+            <table class="table">
+                <thead class="table_head">
+                  <tr>
+                    <th>Name</th>
+                    <th>Issue</th>
+                    <th>Remarks</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each reports}}
+                  <tr data-toggle="modal" onclick="$('#{{this._id}}').modal()">
+                    <th>{{this.establishment}}</th>
+                    <td class="reported_establishment_issue_text">{{this.reports}}</td>
+                    <td>{{#if this.remarks}}Done{{else}}Pending{{/if}}</td>
+                    <td class="reported_establishment_issue_text">{{ convertDate this.createdAt 'LL'}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+            </table>
+          </div>
+        <div class="col-sm-5 mt-3 table-responsive">
+            <table class="table">
+                <thead class="table_head">
+                  <tr>
+                    <th>Customer Concerns</th>
+                    <th>Remarks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each comment}}
+                  <tr data-toggle="modal" onclick="$('#{{this._id}}').modal()">
+                    <td class="customer_concern_text">{{this.rateComment}}</td>
+                    <td>{{#if this.remarks}}Done{{else}}Pending{{/if}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
